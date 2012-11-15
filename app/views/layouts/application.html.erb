@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>MonkeyB</title>
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+		<![endif]-->
+		<%= stylesheet_link_tag    "application", :media => "all" %>
+		<%= javascript_include_tag "application" %>
+		<%= csrf_meta_tags %>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+		<div class="container">
+			<h1>
+				<%= image_tag("monkey-junkie.jpg", :size => "110x80", :alt => "Edit Entry") %>
+				Be Monkey Blog 
+				<span style="float: right"><small><%= Time.now.to_formatted_s(:short)   %></small></span>
+			</h1>
+			<hr>
+			<div class="row">
+				<% if notice %>
+					<p class="alert alert-success"><%= notice %></p>
+				<% end %>
+				<% if alert %>
+					<p class="alert alert-error"><%= alert %></p>
+				<% end %>
+				<div class="span9"><%= yield %></div>
+				<div class="span3">
+			  		<h2>About Us</h2>
+			        <ul class="nav">
+						<li><%= link_to "Home"%></li>
+						<li><%= link_to "Categorie" %></li>
+						<li><%= link_to "Contact Us" %></li>
+			        </ul> 
+			        <div id="user_nav">
+					  <% if admin_signed_in? %>
+					    <p><b>Signed in as <%= current_admin.email %></b></p>
+					    <p class="btn btn-mini">
+					    	<%= link_to "Sign out", destroy_admin_session_path %>
+					    </p>
+					  <% end %>
+					</div>     
+				</div>
+  			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,37 @@
+<% @posts.each do |post| %>
+	<div class="row">
+	  <div class="span8">
+	    <div class="row">
+	      <div class="span8">
+	        <h4><strong><a href="#"><%= post.title %></a></strong></h4>
+	      </div>
+	    </div>
+	    <div class="row">
+	      <div class="span2">
+	        <a href="#" class="thumbnail">
+	            <img src="http://placehold.it/260x180" alt="">
+	        </a>
+	      </div>
+	      <div class="span6">      
+	        <p><%= truncate(post.content, :length => 235, :omission => '...') %></p>
+	        <p><%= link_to 'Lire', post, :class => "btn btn-mini" %></p>
+	      </div>
+	    </div>
+	    <div class="row">
+	      <div class="span8">
+	        <p></p>
+	        <p>
+	          | <i class="icon-calendar"></i> <%= post.created_at.to_formatted_s(:short)  %>
+	          | <i class="icon-comment"></i> <%= post.comments.count %>
+	          | <i class="icon-tags"></i> Tags : 
+	          	<% post.tags.each do |t| %>
+		          	<a href="#">
+			          	<span class="label label-info"><%= t.name %></span>
+			        </a>
+		        <%end%>
+	        </p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+<% end %>

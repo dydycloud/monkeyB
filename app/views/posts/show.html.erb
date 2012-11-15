@@ -1,0 +1,73 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+	  <div class="span8">
+	    <div class="row">
+	      <div class="span8">
+	        <h4><strong><a href="#"><%= @post.title %></a></strong></h4>
+	      </div>
+	    </div>
+	    <div class="row">
+	      <div class="span2">
+	        <a href="#" class="thumbnail">
+	            <img src="http://placehold.it/260x180" alt="">
+	        </a>
+	      </div>
+	      <div class="span6">      
+	        <p><%= raw @post.content %></p>
+	      </div>
+	    </div>
+	    <div class="row">
+	      <div class="span8">
+	        <p></p>
+	        <p>
+	          | <i class="icon-calendar"></i> <%= @post.created_at.to_formatted_s(:short)  %>
+	          | <i class="icon-comment"></i> <a href="#showCommentModal" role="button" data-toggle="modal">Read the <%= @post.comments.count %> Comments</a>
+	          | <a href="#addCommentModal" role="button" data-toggle="modal">Add a comment</a>
+	          | <i class="icon-tags"></i> Tags : 
+	          	<% @post.tags.each do |t| %>
+		          	<a href="#">
+			          	<span class="label label-info"><%= t.name %></span>
+			        </a>
+		        <%end%>
+	        </p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+<% if admin_signed_in? %>
+ 	<%= link_to 'Edit', edit_post_path(@post) %> |
+	<%= link_to 'Back to admin panel', posts_path %>
+<% end %>
+
+<h4><%= link_to 'Back', root_path, :class => "btn btn-mini" %></h4>
+
+<!-- show Comment Modal -->
+<div id="showCommentModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h5>Comments</h5>
+	</div>
+	<div class="modal-body">
+		<% @post.comments.each do |comment| %>
+			<p>
+				<b><%= comment.commenter %></b>
+			</p>
+
+			<p>
+				<%= comment.body %>
+			</p>
+			<% if admin_signed_in? %>
+				<p class="alert alert-error">
+				  <%= link_to 'Destroy Comment', [comment.post, comment],
+				               :confirm => 'Are you sure?',
+				               :method => :delete %>
+				</p>
+			<% end %>
+		<% end %>
+	</div>
+</div>
+
+<!-- add Comment Modal -->
+<%= render "comments/form" %>
