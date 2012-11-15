@@ -22,7 +22,7 @@
 	        <p></p>
 	        <p>
 	          | <i class="icon-calendar"></i> <%= @post.created_at.to_formatted_s(:short)  %>
-	          | <i class="icon-comment"></i> <a href="#showCommentModal" role="button" data-toggle="modal">Read the <%= @post.comments.count %> Comments</a>
+	          | <a href="#showCommentModal" role="button" data-toggle="modal">read <i class="icon-comment"></i> <%= @post.comments.count %></a>
 	          | <a href="#addCommentModal" role="button" data-toggle="modal">Add a comment</a>
 	          | <i class="icon-tags"></i> Tags : 
 	          	<% @post.tags.each do |t| %>
