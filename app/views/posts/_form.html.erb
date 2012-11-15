@@ -20,6 +20,11 @@
     <%= f.label :content %><br />
     <%= f.text_area(:content, :cols => 70, :rows => 5,) %>
   </div>
+  
+  <div class="field">
+    <%= f.label :image, "Photo" %>
+    <%= f.file_field :image %>
+  </div>
 
   <%= render :partial => 'tags/form',
              :locals => {:form => f} %>
